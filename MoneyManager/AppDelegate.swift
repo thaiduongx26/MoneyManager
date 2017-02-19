@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        let realm = try! Realm()
+//        let str = "Ăn uống"
+//        let index = realm.objects(Index.self).filter("dadName=%@",str).first
+////        index?.dadName = "Sida"
+//        let index2 : Index = index!
+//        index2.dadName = "Sida"
+//        try! realm.write {
+//            realm.add(index2, update: true)
+//        }
+        
+        if(!UserDefaults.standard.bool(forKey: "firstlaunch1.0")){
+            //Put any code here and it will be executed only once.
+            print("Is a first launch")
+            DB.share().setupBasicDB()
+            UserDefaults.standard.set(true, forKey: "firstlaunch1.0")
+            UserDefaults.standard.synchronize();
+        }
         return true
     }
 
